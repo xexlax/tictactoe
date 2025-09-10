@@ -11,7 +11,7 @@ public class TicTacToeUI : MonoBehaviour
 	public Text aiMarkLabel;
 	public GameObject startPanel;
 	public GameObject gamePanel;
-	public Button startButton;
+	public Button startButton,quitButton;
 	public Dropdown difficultyDropdown;
 	public Dropdown firstPlayerDropdown; // 0: Human, 1: AI
 	public Button backToMenuButton;
@@ -57,6 +57,10 @@ public class TicTacToeUI : MonoBehaviour
 		if (backToMenuButton != null)
 		{
 			backToMenuButton.onClick.AddListener(BackToMenu);
+		}
+		if( quitButton != null )
+		{
+			quitButton.onClick.AddListener(ExitGame);
 		}
 	}
 
@@ -130,6 +134,14 @@ public class TicTacToeUI : MonoBehaviour
 		{
 			DoAIMove();
 		}
+	}
+	
+	public void ExitGame()
+	{
+		Application.Quit();
+		#if UNITY_EDITOR
+				UnityEditor.EditorApplication.isPlaying = false;
+		#endif
 	}
 
 	private void OnCellClicked(int index)
